@@ -1,4 +1,4 @@
-<form (ngSubmit)="holaMundo()">
+<form>
     <label for="origen">Origen:</label>
     <input type="text" id="origen" name="origen" ngModel required>
   
@@ -6,20 +6,20 @@
     <input type="text" id="destino" name="destino" ngModel required>
   
     <label for="tipoTransporte">Tipo de Transporte:</label>
-    <select id="tipoTransporte" name="tipoTransporte" ngModel (change)="cambiarDetallesTransporte()">
+    <select id="tipoTransporte" name="tipoTransporte" ngModel>
       <option value="coche">Coche</option>
       <option value="tren">Tren</option>
       <option value="avion">Avión</option>
     </select>
-  
-    <label *ngIf="tipoTransporte === 'coche'" for="matricula">Matrícula:</label>
-    <input *ngIf="tipoTransporte === 'coche'" type="text" id="matricula" name="matricula" ngModel>
-  
-    <label *ngIf="tipoTransporte === 'tren'" for="numTren">Número de Tren:</label>
-    <input *ngIf="tipoTransporte === 'tren'" type="text" id="numTren" name="numTren" ngModel>
-  
-    <label *ngIf="tipoTransporte === 'avion'" for="numVuelo">Número de Vuelo:</label>
-    <input *ngIf="tipoTransporte === 'avion'" type="text" id="numVuelo" name="numVuelo" ngModel>
+    
+    <input *@if="tipoTransporte === 'coche'" type="text" id="matricula" name="matricula" ngModel>
+    <label for="matricula">Matrícula:</label>
+   
+    <input *@if="tipoTransporte === 'tren'" type="text" id="numTren" name="numTren" ngModel>
+    <label for="numTren">Número de Tren:</label>
+    
+    <input *@if="tipoTransporte === 'avion'" type="text" id="numVuelo" name="numVuelo" ngModel>
+    <label for="numVuelo">Número de Vuelo:</label>
   
     <button type="submit">Agregar Conexión</button>
   </form>

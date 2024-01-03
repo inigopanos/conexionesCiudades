@@ -1,0 +1,26 @@
+<form (ngSubmit)="holaMundo()">
+    <label for="origen">Origen:</label>
+    <input type="text" id="origen" name="origen" ngModel required>
+  
+    <label for="destino">Destino:</label>
+    <input type="text" id="destino" name="destino" ngModel required>
+  
+    <label for="tipoTransporte">Tipo de Transporte:</label>
+    <select id="tipoTransporte" name="tipoTransporte" ngModel (change)="cambiarDetallesTransporte()">
+      <option value="coche">Coche</option>
+      <option value="tren">Tren</option>
+      <option value="avion">Avión</option>
+    </select>
+  
+    <label *ngIf="tipoTransporte === 'coche'" for="matricula">Matrícula:</label>
+    <input *ngIf="tipoTransporte === 'coche'" type="text" id="matricula" name="matricula" ngModel>
+  
+    <label *ngIf="tipoTransporte === 'tren'" for="numTren">Número de Tren:</label>
+    <input *ngIf="tipoTransporte === 'tren'" type="text" id="numTren" name="numTren" ngModel>
+  
+    <label *ngIf="tipoTransporte === 'avion'" for="numVuelo">Número de Vuelo:</label>
+    <input *ngIf="tipoTransporte === 'avion'" type="text" id="numVuelo" name="numVuelo" ngModel>
+  
+    <button type="submit">Agregar Conexión</button>
+  </form>
+  

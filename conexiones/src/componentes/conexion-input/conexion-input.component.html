@@ -1,26 +1,48 @@
-<form>
+<form (ngSubmit)="agregarConexion(form)" #form="ngForm">
     <label for="origen">Origen:</label>
     <input type="text" id="origen" name="origen" ngModel required>
   
     <label for="destino">Destino:</label>
     <input type="text" id="destino" name="destino" ngModel required>
   
-    <label for="tipoTransporte">Tipo de Transporte:</label>
-    <select id="tipoTransporte" name="tipoTransporte" ngModel>
+    <label for="tipoTransporte"></label>
+    <select id="tipoTransporte" name="tipoTransporte" [(ngModel)]="tipoTransporteSeleccionado">
       <option value="coche">Coche</option>
       <option value="tren">Tren</option>
       <option value="avion">Avión</option>
+      <option value="barco">Barco</option>
     </select>
+     
     
-    <input *@if="tipoTransporte === 'coche'" type="text" id="matricula" name="matricula" ngModel>
-    <label for="matricula">Matrícula:</label>
+    <div *ngIf="tipoTransporteSeleccionado === 'coche'">
+        <!-- Campos para Coche -->
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula">
+    </div>
+    <div *ngIf="tipoTransporteSeleccionado === 'tren'">
+        <!-- Campos para Tren -->
+        <label for="numTren">Número de tren:</label>
+        <input type="text" id="numTren" name="numTren">
+
+        <label for="numAsientoTren">Número de asiento:</label>
+        <input type="text" id="numAsientoTren" name="numAsientoTren">
+    </div>
+    <div *ngIf="tipoTransporteSeleccionado === 'avion'">
+        <!-- Campos para Avión -->
+        <label for="numTren">Número de avion:</label>
+        <input type="text" id="numTren" name="numTren">
+
+        <label for="numAsientoAvion">Número de asiento:</label>
+        <input type="text" id="numAsientoAvion" name="numAsientoAvion">
+    </div>
+    <div *ngIf="tipoTransporteSeleccionado === 'barco'">
+        <!-- Campos para Avión -->
+        <label for="numBarco">Número de barco:</label>
+        <input type="text" id="numBarco" name="numBarco">
+
+    </div>
    
-    <input *@if="tipoTransporte === 'tren'" type="text" id="numTren" name="numTren" ngModel>
-    <label for="numTren">Número de Tren:</label>
-    
-    <input *@if="tipoTransporte === 'avion'" type="text" id="numVuelo" name="numVuelo" ngModel>
-    <label for="numVuelo">Número de Vuelo:</label>
-  
-    <button type="submit">Agregar Conexión</button>
-  </form>
+    <button type="submit" >Agregar Conexión</button>
+    <button type="button" (click)="close()">Cerrar</button>
+  </form> 
   

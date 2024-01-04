@@ -43,7 +43,7 @@ export class ConexionFormComponent {
 
   agregarConexion(form: NgForm) {
     const conexion = this.crearConexion(this.tipoTransporteSeleccionado!, form.value);
-    this.conexiones.push({...form.value})
+    this.conexiones.push({...form.value});
     this.conexionesString.push(conexion.toString());
     this.ciudadService.agregarConexionesString(conexion.toString())
         
@@ -68,8 +68,8 @@ export class ConexionFormComponent {
 
       case 'avion':
         return new Avion(
-          values.numAsientoAvion,
           values.numVuelo,
+          values.numAsientoAvion,
           values.origen,
           values.destino
         );

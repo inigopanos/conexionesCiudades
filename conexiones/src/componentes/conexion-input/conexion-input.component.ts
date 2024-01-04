@@ -17,19 +17,22 @@ export class ConexionFormComponent {
   tipoTransporteSeleccionado: string | undefined;
   conexiones: Conexion[] = [];
   nuevaConexion: any = {};
+  ciudades: string[] = [];
 
   constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
 
   agregarConexion(form: NgForm) {
-    console.log('Nueva Conexion:', form.value);
-    this.conexiones.push({ ...form.value });
-    console.log('Conexiones:', this.conexiones);
-    form.resetForm();
-    this.nuevaConexion = {}
+    if (this.ciudades.length > 0) {
+      console.log('Nueva Conexion:', form.value);
+      this.conexiones.push({ ...form.value });
+      console.log('Conexiones:', this.conexiones);
+      form.resetForm();
+      this.nuevaConexion = {};
+    }
   }
 
   eliminarConexion(index: number) {
-    this.conexiones.splice(index, 1)
+    this.conexiones.splice(index, 1);
   }
 
   close() {

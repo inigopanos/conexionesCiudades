@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -9,13 +9,16 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './ciudades-form.component.sass'
 })
 export class CiudadesFormComponent {
+  @Output() ciudadAgregada = new EventEmitter<string>();
+  nuevaCiudad: string = '';
+  ciudades: string[] = []
 
   agregarCiudades(form: NgForm){
-    const origen = form.value.origen;
-    const destino = form.value.destino;
-
-    console.log('Ciudad Origen:', origen)
-    console.log('Ciudad Destino:', destino)
-    console.log('Todo:', form.value)
+    if (form.valid) {
+      this.ciudades.push(this.nuevaCiudad)
+      this.ciudadAgregada.emit(this.nuevaCiudad);
+      form.resetForm();
+      this.nuevaCiudad = '';
+    }
   }
 }

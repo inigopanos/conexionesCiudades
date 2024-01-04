@@ -15,4 +15,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'conexiones';
+  ciudades: string[] = [];
+
+  onCiudadAgregada(ciudad: string){
+    this.ciudades.push(ciudad);
+    console.log('Ciduades:', this.ciudades);
+  }
 }

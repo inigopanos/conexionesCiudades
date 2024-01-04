@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Conexion } from '../../clases/constructor';
+import { Conexion, Ciudad, Transporte } from '../../clases/constructor';
+import { CiudadService } from '../../servicios/ciudad.service';
 
 @Component({
   selector: 'app-conexion-form',
@@ -15,26 +16,29 @@ import { Conexion } from '../../clases/constructor';
 })
 export class ConexionFormComponent {
   @Input() ciudades: string[] = [];
+  constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
 
-  tipoTransporteSeleccionado: string | undefined;
   conexiones: Conexion[] = [];
   nuevaConexion: any = {};
 
-  constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
+  origen: Ciudad | undefined;
+  destino: Ciudad | undefined;
+  transporte: Transporte | undefined;
+  tipoTransporteSeleccionado: string | undefined;
 
   formatConexionString(conexion: Conexion): string {
+    const partes = [conexion.origen, conexion.destino, conexion.transporte];
+
     return `${conexion.origen} ${conexion.destino} ${conexion.transporte}`;
   }
 
   agregarConexion(form: NgForm) {
-    console.log('Nueva Conexion:', form.value);
     this.conexiones.push({ ...form.value });
-    console.log('Conexiones:', this.conexiones);
-    form.resetForm();
     this.nuevaConexion = {};
-
     const conexionString = this.formatConexionString(form.value);
-    console.log('Conexión formateada:', conexionString);
+    console.log('Conexion recibida a string:', conexionString);
+
+    form.resetForm();
   }
 
   eliminarConexion(index: number) {

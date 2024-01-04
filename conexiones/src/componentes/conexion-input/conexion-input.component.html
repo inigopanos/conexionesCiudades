@@ -21,20 +21,20 @@
       name="transporte"
       [(ngModel)]="tipoTransporteSeleccionado"
     >
-      <option value="coche">Coche</option>
-      <option value="tren">Tren</option>
-      <option value="avion">Avión</option>
-      <option value="barco">Barco</option>
+      <option value="Coche">Coche</option>
+      <option value="Tren">Tren</option>
+      <option value="Avion">Avión</option>
+      <option value="Barco">Barco</option>
     </select>
 
-    <div *ngIf="tipoTransporteSeleccionado === 'coche'">
+    <div *ngIf="tipoTransporteSeleccionado === 'Coche'">
       <!-- Campos para Coche -->
       <label for="matricula">Matrícula:</label>
       <input type="text" id="matricula" name="matricula" ngModel required />
     </div>
-    <div *ngIf="tipoTransporteSeleccionado === 'tren'">
+    <div *ngIf="tipoTransporteSeleccionado === 'Tren'">
       <!-- Campos para Tren -->
-      <label for="numTren">Número de tren:</label>
+      <label for="numTren">Número de Tren:</label>
       <input type="text" id="numTren" name="numTren" ngModel required />
 
       <label for="numAsientoTren">Número de asiento:</label>
@@ -46,10 +46,10 @@
         required
       />
     </div>
-    <div *ngIf="tipoTransporteSeleccionado === 'avion'">
+    <div *ngIf="tipoTransporteSeleccionado === 'Avion'">
       <!-- Campos para Avión -->
-      <label for="numTren">Número de avion:</label>
-      <input type="text" id="numTren" name="numTren" ngModel required />
+      <label for="numAvion">Número de avion:</label>
+      <input type="text" id="numAvion" name="numAvion" ngModel required />
 
       <label for="numAsientoAvion">Número de asiento:</label>
       <input
@@ -60,7 +60,7 @@
         required
       />
     </div>
-    <div *ngIf="tipoTransporteSeleccionado === 'barco'">
+    <div *ngIf="tipoTransporteSeleccionado === 'Barco'">
       <!-- Campos para Avión -->
       <label for="numBarco">Número de barco:</label>
       <input type="text" id="numBarco" name="numBarco" ngModel required />

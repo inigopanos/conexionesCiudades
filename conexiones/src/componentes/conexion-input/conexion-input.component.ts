@@ -14,7 +14,7 @@ import { Conexion } from '../../clases/constructor';
   providers: [{ provide: MatDialogRef, useValue: {} }],
 })
 export class ConexionFormComponent {
-    @Input() ciudades: string[] = [];
+  @Input() ciudades: string[] = [];
 
   tipoTransporteSeleccionado: string | undefined;
   conexiones: Conexion[] = [];
@@ -22,12 +22,19 @@ export class ConexionFormComponent {
 
   constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
 
+  formatConexionString(conexion: Conexion): string {
+    return `${conexion.origen} ${conexion.destino} ${conexion.transporte}`;
+  }
+
   agregarConexion(form: NgForm) {
     console.log('Nueva Conexion:', form.value);
     this.conexiones.push({ ...form.value });
     console.log('Conexiones:', this.conexiones);
     form.resetForm();
     this.nuevaConexion = {};
+
+    const conexionString = this.formatConexionString(form.value);
+    console.log('Conexión formateada:', conexionString);
   }
 
   eliminarConexion(index: number) {

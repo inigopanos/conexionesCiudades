@@ -1,8 +1,17 @@
 <h1>Hello World!</h1>
 <div class="main-page">
   Hola mundo
-  <app-ciudades-form (ciudadAgregada)="onCiudadAgregada($event)"></app-ciudades-form><br>
-  <app-conexion-form [ciudades]="ciudades"></app-conexion-form>
+  <app-ciudades-form
+    (ciudadAgregada)="onCiudadAgregada($event)"
+  ></app-ciudades-form
+  ><br />
+
+  <div  *ngIf="ciudades.length > 1; else elseBlock"> 
+    <app-conexion-form [ciudades]="ciudades"></app-conexion-form>
+  </div>
+  <ng-template #elseBlock>
+    <p>Introduzca al menos dos ciudades para continuar</p>
+  </ng-template>
 </div>
 
 <div *ngIf="ciudades.length > 0">

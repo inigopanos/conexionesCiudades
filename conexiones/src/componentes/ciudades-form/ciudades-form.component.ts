@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CiudadService } from '../../servicios/ruta.service';
+import { CiudadService } from '../../servicios/ciudad.service';
 
 @Component({
   selector: 'app-ciudades-form',
@@ -20,12 +20,14 @@ export class CiudadesFormComponent {
   
     if (form.valid) {
       this.ciudadAgregada.emit(this.nuevaCiudad);
+      this.ciudadService.agregarCiudad(this.nuevaCiudad)
       form.resetForm();
       this.nuevaCiudad = '';
     }
   }
 
-  eliminarCiudad(ciudad: any) {
+  eliminarCiudad(ciudad: string) {
+    this.ciudadService.eliminarCiudad(ciudad)
     this.ciudades = this.ciudades.filter((c) => c !== ciudad);
   }
 

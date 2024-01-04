@@ -39,10 +39,10 @@ class Transporte {
 class Tren extends Transporte {
   numTren: string;
   numAsiento: string;
-  origen: Ciudad;
-  destino: Ciudad;
+  origen: string;
+  destino: string;
 
-  constructor(numTren: string, numAsiento: string, origen: Ciudad, destino: Ciudad) {
+  constructor(numTren: string, numAsiento: string, origen: string, destino: string) {
     super("Tren");
     this.numTren = numTren;
     this.numAsiento = numAsiento;
@@ -58,10 +58,10 @@ class Tren extends Transporte {
 class Avion extends Transporte {
   numAsiento: string;
   numVuelo: string;
-  origen: Ciudad;
-  destino: Ciudad;
+  origen: string;
+  destino: string;
 
-  constructor(numAsiento: string, numVuelo: string, origen: Ciudad, destino: Ciudad) {
+  constructor(numAsiento: string, numVuelo: string, origen: string, destino: string) {
     super("Avion");
     this.numAsiento = numAsiento;
     this.numVuelo = numVuelo;
@@ -76,10 +76,10 @@ class Avion extends Transporte {
 
 class Coche extends Transporte {
   matricula: string;
-  origen: Ciudad;
-  destino: Ciudad;
+  origen: string;
+  destino: string;
 
-  constructor(matricula: string, origen: Ciudad, destino: Ciudad) {
+  constructor(matricula: string, origen: string, destino: string) {
     super("Coche");
     this.matricula = matricula;
     this.origen = origen;
@@ -93,10 +93,10 @@ class Coche extends Transporte {
 
 class Barco extends Transporte {
   numBarco: string;
-  origen: Ciudad;
-  destino: Ciudad;
+  origen: string;
+  destino: string;
 
-  constructor(numBarco: string, origen: Ciudad, destino: Ciudad) {
+  constructor(numBarco: string, origen: string, destino: string) {
     super("Barco");
     this.numBarco = numBarco;
     this.origen = origen;

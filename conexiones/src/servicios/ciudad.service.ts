@@ -25,11 +25,5 @@ export class CiudadService {
     this.conexiones.push(conexion);
   }
 
-//   crearRedCiudades(ciudades: string[], conexiones: string[]) {
-//     const redCiudades = {};
 
-//     for (const nombreCiudad of ciudades) {
-//       redCiudades[nombreCiudad] = new Ciudad(nombreCiudad);
-//     }
-//   }
 }

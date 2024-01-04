@@ -25,7 +25,8 @@ import { CiudadService } from '../../servicios/ciudad.service';
 export class ConexionFormComponent {
   @Input() ciudades: string[] = [];
 
-  conexiones: Conexion[] = [];
+  conexiones: Conexion[] = []
+  conexionesString: string[] = [];
   nuevaConexion: any = {};
 
   origen: Ciudad | undefined;
@@ -41,15 +42,15 @@ export class ConexionFormComponent {
 
 
   agregarConexion(form: NgForm) {
-    const transporte = this.crearTransporte(this.tipoTransporteSeleccionado!, form.value);
-
-    this.conexiones.push({ ...form.value });
+    const conexion = this.crearConexion(this.tipoTransporteSeleccionado!, form.value);
+    this.conexiones.push({...form.value})
+    this.conexionesString.push(conexion.toString());
     this.nuevaConexion = {};
 
     form.resetForm();
   }
 
-  private crearTransporte(
+  private crearConexion(
     tipo: string,
     values: any,
     

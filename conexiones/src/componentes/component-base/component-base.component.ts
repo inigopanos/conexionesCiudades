@@ -12,8 +12,11 @@ export class ComponentBaseComponent {
 
   constructor(private dialog: MatDialog) {}
 
-  // openDialog(){
-  //   this.dialog.open(ConexionForm)
-  // }
+  ciudades: string[] = [];
+
+  onCiudadAgregada(ciudad: string){
+    this.ciudades.push(ciudad);
+    console.log('Ciudades:', this.ciudades);
+  }
 
 }

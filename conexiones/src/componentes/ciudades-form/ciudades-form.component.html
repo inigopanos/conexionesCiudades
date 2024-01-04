@@ -1,18 +1,11 @@
 <form (ngSubmit)="agregarCiudades(form)" #form="ngForm">
-    <label for="ciudad">Ciudad</label>
-    <input type="text" id="ciudad" name="ciudad" [(ngModel)]="nuevaCiudad" required>  
-    <button type="submit">Agregar Ciudades</button>
-
-    <div *ngIf="ciudades.length > 0">
-      <label for="ciudadOrigen">Ciudad Origen:</label>
-      <select id="ciudadOrigen" name="ciudadOrigen" [(ngModel)]="ciudadOrigen">
-        <option *ngFor="let ciudad of ciudades" [value]="ciudad">{{ ciudad }}</option>
-      </select>
-  
-      <label for="ciudadDestino">Ciudad Destino:</label>
-      <select id="ciudadDestino" name="ciudadDestino" [(ngModel)]="ciudadDestino">
-        <option *ngFor="let ciudad of ciudades" [value]="ciudad">{{ ciudad }}</option>
-      </select>
-    </div>
+  <label for="ciudad">Ciudad</label>
+  <input
+    type="text"
+    id="ciudad"
+    name="ciudad"
+    [(ngModel)]="nuevaCiudad"
+    required
+  />
+  <button type="submit">Agregar Ciudades</button>
 </form>
-  

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -14,21 +14,20 @@ import { Conexion } from '../../clases/constructor';
   providers: [{ provide: MatDialogRef, useValue: {} }],
 })
 export class ConexionFormComponent {
+    @Input() ciudades: string[] = [];
+
   tipoTransporteSeleccionado: string | undefined;
   conexiones: Conexion[] = [];
   nuevaConexion: any = {};
-  ciudades: string[] = [];
 
   constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
 
   agregarConexion(form: NgForm) {
-    if (this.ciudades.length > 0) {
-      console.log('Nueva Conexion:', form.value);
-      this.conexiones.push({ ...form.value });
-      console.log('Conexiones:', this.conexiones);
-      form.resetForm();
-      this.nuevaConexion = {};
-    }
+    console.log('Nueva Conexion:', form.value);
+    this.conexiones.push({ ...form.value });
+    console.log('Conexiones:', this.conexiones);
+    form.resetForm();
+    this.nuevaConexion = {};
   }
 
   eliminarConexion(index: number) {

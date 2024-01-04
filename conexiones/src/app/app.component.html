@@ -2,5 +2,17 @@
 <div class="main-page">
   Hola mundo
   <app-ciudades-form (ciudadAgregada)="onCiudadAgregada($event)"></app-ciudades-form><br>
-  <app-conexion-form></app-conexion-form>
+  <app-conexion-form [ciudades]="ciudades"></app-conexion-form>
+</div>
+
+<div *ngIf="ciudades.length > 0">
+  <h2>Ciudades:</h2>
+  <ul>
+    @for (ciudad of ciudades; track ciudad){
+    <li>
+      {{ ciudad }}
+      <button type="button" (click)="eliminarCiudad(ciudad)">Eliminar</button>
+    </li>
+    }
+  </ul>
 </div>

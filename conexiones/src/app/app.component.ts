@@ -19,6 +19,10 @@ export class AppComponent {
 
   onCiudadAgregada(ciudad: string){
     this.ciudades.push(ciudad);
-    console.log('Ciduades:', this.ciudades);
+    console.log('Ciudades:', this.ciudades);
+  }
+  
+  eliminarCiudad(ciudad: any) {
+    this.ciudades = this.ciudades.filter((c) => c !== ciudad);
   }
 }

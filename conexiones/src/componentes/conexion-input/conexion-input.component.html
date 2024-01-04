@@ -1,58 +1,82 @@
 <form (ngSubmit)="agregarConexion(form)" #form="ngForm">
-  <label for="origen">Origen:</label>
-  <input type="text" id="origen" name="origen" ngModel required />
+  <div *ngIf="ciudades.length > 0">
+    <label for="origen">Origen:</label>
+    <select id="origen" name="origen" ngModel required>
+      <option *ngFor="let ciudad of ciudades" [value]="ciudad">
+        {{ ciudad }}
+      </option>
+    </select>
 
-  <label for="destino">Destino:</label>
-  <input type="text" id="destino" name="destino" ngModel required />
+    <label for="destino">Destino:</label>
+    <label for="destino">Destino:</label>
+    <select id="destino" name="destino" ngModel required>
+      <option *ngFor="let ciudad of ciudades" [value]="ciudad">
+        {{ ciudad }}
+      </option>
+    </select>
 
-  <label for="transporte"></label>
-  <select
-    id="transporte"
-    name="transporte"
-    [(ngModel)]="tipoTransporteSeleccionado"
-  >
-    <option value="coche">Coche</option>
-    <option value="tren">Tren</option>
-    <option value="avion">Avión</option>
-    <option value="barco">Barco</option>
-  </select>
+    <label for="transporte"></label>
+    <select
+      id="transporte"
+      name="transporte"
+      [(ngModel)]="tipoTransporteSeleccionado"
+    >
+      <option value="coche">Coche</option>
+      <option value="tren">Tren</option>
+      <option value="avion">Avión</option>
+      <option value="barco">Barco</option>
+    </select>
 
-  <div *ngIf="tipoTransporteSeleccionado === 'coche'">
-    <!-- Campos para Coche -->
-    <label for="matricula">Matrícula:</label>
-    <input type="text" id="matricula" name="matricula" ngModel required/>
+    <div *ngIf="tipoTransporteSeleccionado === 'coche'">
+      <!-- Campos para Coche -->
+      <label for="matricula">Matrícula:</label>
+      <input type="text" id="matricula" name="matricula" ngModel required />
+    </div>
+    <div *ngIf="tipoTransporteSeleccionado === 'tren'">
+      <!-- Campos para Tren -->
+      <label for="numTren">Número de tren:</label>
+      <input type="text" id="numTren" name="numTren" ngModel required />
+
+      <label for="numAsientoTren">Número de asiento:</label>
+      <input
+        type="text"
+        id="numAsientoTren"
+        name="numAsientoTren"
+        ngModel
+        required
+      />
+    </div>
+    <div *ngIf="tipoTransporteSeleccionado === 'avion'">
+      <!-- Campos para Avión -->
+      <label for="numTren">Número de avion:</label>
+      <input type="text" id="numTren" name="numTren" ngModel required />
+
+      <label for="numAsientoAvion">Número de asiento:</label>
+      <input
+        type="text"
+        id="numAsientoAvion"
+        name="numAsientoAvion"
+        ngModel
+        required
+      />
+    </div>
+    <div *ngIf="tipoTransporteSeleccionado === 'barco'">
+      <!-- Campos para Avión -->
+      <label for="numBarco">Número de barco:</label>
+      <input type="text" id="numBarco" name="numBarco" ngModel required />
+    </div>
+
+    <button type="submit">Agregar Conexión</button>
   </div>
-  <div *ngIf="tipoTransporteSeleccionado === 'tren'">
-    <!-- Campos para Tren -->
-    <label for="numTren">Número de tren:</label>
-    <input type="text" id="numTren" name="numTren" ngModel required/>
-
-    <label for="numAsientoTren">Número de asiento:</label>
-    <input type="text" id="numAsientoTren" name="numAsientoTren" ngModel required/>
-  </div>
-  <div *ngIf="tipoTransporteSeleccionado === 'avion'">
-    <!-- Campos para Avión -->
-    <label for="numTren">Número de avion:</label>
-    <input type="text" id="numTren" name="numTren" ngModel required/>
-
-    <label for="numAsientoAvion">Número de asiento:</label>
-    <input type="text" id="numAsientoAvion" name="numAsientoAvion" ngModel required/>
-  </div>
-  <div *ngIf="tipoTransporteSeleccionado === 'barco'">
-    <!-- Campos para Avión -->
-    <label for="numBarco">Número de barco:</label>
-    <input type="text" id="numBarco" name="numBarco" ngModel required/>
-  </div>
-
-  <button type="submit">Agregar Conexión</button>
 </form>
 
 <div *ngIf="conexiones.length > 0">
-    <h3>Conexiones existentes:</h3>
-    <div *ngFor="let conexion of conexiones; let i = index">
-      <div>
-        {{ conexion.origen }} a {{ conexion.destino }} usando {{ conexion.transporte }}
-        <button type="button" (click)="eliminarConexion(i)">Eliminar</button>
-      </div>
+  <h3>Conexiones existentes:</h3>
+  <div *ngFor="let conexion of conexiones; let i = index">
+    <div>
+      {{ conexion.origen }} a {{ conexion.destino }} usando
+      {{ conexion.transporte }}
+      <button type="button" (click)="eliminarConexion(i)">Eliminar</button>
     </div>
   </div>
+</div>

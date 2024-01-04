@@ -41,7 +41,7 @@ export class CiudadService {
     this.ciudadDestino = destino;
   }
 
-  crearRedCiudades(ciudades: Ciudad[], conexiones:Conexion[]){
+  crearRedCiudades(ciudades: string[], conexiones:string[]){
     const redCiudades: { [key: string]: Ciudad } = {};
 
     // Crea un objeto ciudad por cada una de las ciudades del input
@@ -78,8 +78,16 @@ export class CiudadService {
           console.error(`Tipo de transporte desconocido: ${tipoTransporte}`);
           continue;
       }
+
+      redCiudades[origen].agregarConexion(
+        new Conexion(redCiudades[origen], redCiudades[destino], transporte)
+      );
     }
+
+    console.log('Red Ciudades:', redCiudades);
+    return redCiudades;
   }
 
- 
+  redCiudades = this.crearRedCiudades(this.ciudadesString, this.conexionesString);
+  
 }

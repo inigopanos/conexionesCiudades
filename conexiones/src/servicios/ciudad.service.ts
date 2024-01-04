@@ -14,8 +14,6 @@ import {
   providedIn: 'root',
 })
 export class CiudadService {
-  ciudades: Ciudad[] = [];
-  conexiones: Conexion[] = [];
 
   ciudadesString: string[] = [];
   conexionesString: string[] = [];
@@ -23,13 +21,17 @@ export class CiudadService {
   ciudadOrigen: string = '';
   ciudadDestino: string = '';
 
-  agregarCiudad(ciudad: Ciudad): void {
-    this.ciudades.push(ciudad);
+  agregarConexionesString(conexionString:string){
+    this.conexionesString.push(conexionString);
+    console.log('Conexiones String:', this.conexionesString);
+
   }
 
-  agregarConexion(conexion: Conexion): void {
-    this.conexiones.push(conexion);
+  setOrigenDestino(origen: string, destino: string){
+    this.ciudadOrigen = origen;
+    this.ciudadDestino = destino;
   }
+
 
   encontrarRutas(ciudadOrigen: string, ciudadDestino: string){
 

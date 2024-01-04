@@ -45,6 +45,8 @@ export class ConexionFormComponent {
     const conexion = this.crearConexion(this.tipoTransporteSeleccionado!, form.value);
     this.conexiones.push({...form.value})
     this.conexionesString.push(conexion.toString());
+    this.ciudadService.agregarConexionesString(conexion.toString())
+        
     this.nuevaConexion = {};
 
     form.resetForm();

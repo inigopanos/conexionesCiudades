@@ -1,1 +1,16 @@
-<p>component-base works!</p>
+<form (ngSubmit)="ciudadOrigenDestino(form)" #form="ngForm">
+    <label for="origen">Origen:</label>
+    <select id="origen" name="origen" ngModel required>
+      <option *ngFor="let ciudad of ciudades" [value]="ciudad">
+        {{ ciudad }}
+      </option>
+    </select>
+
+    <label for="destino">Destino:</label>
+    <select id="destino" name="destino" ngModel required>
+      <option *ngFor="let ciudad of ciudades" [value]="ciudad">
+        {{ ciudad }}
+      </option>
+    </select>
+    <button type="submit">Buscar ruta</button>
+</form>

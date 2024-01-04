@@ -17,6 +17,12 @@ export class CiudadService {
   ciudades: Ciudad[] = [];
   conexiones: Conexion[] = [];
 
+  ciudadesString: string[] = [];
+  conexionesString: string[] = [];
+
+  ciudadOrigen: string = '';
+  ciudadDestino: string = '';
+
   agregarCiudad(ciudad: Ciudad): void {
     this.ciudades.push(ciudad);
   }
@@ -25,5 +31,7 @@ export class CiudadService {
     this.conexiones.push(conexion);
   }
 
+  encontrarRutas(ciudadOrigen: string, ciudadDestino: string){
 
+  }
 }

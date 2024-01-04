@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-component-base',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './component-base.component.html',
   styleUrl: './component-base.component.sass'
 })
 export class ComponentBaseComponent {
+  @Input() ciudades: string[] = [];
 
-  constructor(private dialog: MatDialog) {}
+  ciudadOrigen: string = ''
+  ciudadDestino: string = ''
 
-  ciudades: string[] = [];
+ 
+  constructor() {}
 
-  onCiudadAgregada(ciudad: string){
-    this.ciudades.push(ciudad);
-    console.log('Ciudades:', this.ciudades);
+  ciudadOrigenDestino(form: NgForm){
+    console.log('Ciudades origen y destino:', form.value.origen, form.value.destino);
+    this.ciudadOrigen = form.value.origen;
+    this.ciudadDestino = form.value.origen;
+
+    return this.ciudadOrigen, this.ciudadDestino;
   }
 
 }

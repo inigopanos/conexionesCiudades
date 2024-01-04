@@ -1,6 +1,9 @@
 <h1>Hello World!</h1>
 <div class="main-page">
-  Hola mundo
+  <app-component-base [ciudades]="ciudades"> 
+  </app-component-base>
+  <br>
+
   <app-ciudades-form
     (ciudadAgregada)="onCiudadAgregada($event)"
   ></app-ciudades-form

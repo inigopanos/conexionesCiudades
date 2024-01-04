@@ -39,8 +39,6 @@ export class ConexionFormComponent {
     private ciudadService: CiudadService
   ) {}
 
-
-
   agregarConexion(form: NgForm) {
     const conexion = this.crearConexion(this.tipoTransporteSeleccionado!, form.value);
     this.conexiones.push({...form.value});

@@ -1,4 +1,4 @@
-<form (ngSubmit)="ciudadOrigenDestino(form)" #form="ngForm">
+<form (ngSubmit)="buscarRuta(form)" #form="ngForm">
     <label for="origen">Origen:</label>
     <select id="origen" name="origen" ngModel required>
       <option *ngFor="let ciudad of ciudades" [value]="ciudad">
@@ -14,3 +14,7 @@
     </select>
     <button type="submit">Buscar ruta</button>
 </form>
+
+<div>
+  Resultado: 
+</div>

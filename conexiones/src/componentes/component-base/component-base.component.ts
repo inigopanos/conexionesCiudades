@@ -13,11 +13,20 @@ import { CiudadService } from '../../servicios/ciudad.service';
 export class ComponentBaseComponent {
   @Input() ciudades: string[] = [];
 
+  resultado: string = '';
   constructor(private ciudadService: CiudadService) {}
 
   ciudadOrigenDestino(form: NgForm){
     this.ciudadService.setOrigenDestino(form.value.origen, form.value.destino);
   }
 
+  buscarRuta(form: NgForm){
+    // Se pasan las ciudades de origen y destino
+    this.ciudadOrigenDestino(form);
+
+    // Se llama al servicio para que cree la red de ciudades
+    let mensaje = this.ciudadService.buscarRuta();
+    console.log('Mensaje:', mensaje);
+  }
 
 }

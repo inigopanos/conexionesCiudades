@@ -3,7 +3,15 @@ import { CommonModule } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Conexion, Ciudad, Transporte } from '../../clases/constructor';
+import {
+  Conexion,
+  Ciudad,
+  Transporte,
+  Tren,
+  Avion,
+  Coche,
+  Barco,
+} from '../../clases/constructor';
 import { CiudadService } from '../../servicios/ciudad.service';
 
 @Component({
@@ -16,7 +24,6 @@ import { CiudadService } from '../../servicios/ciudad.service';
 })
 export class ConexionFormComponent {
   @Input() ciudades: string[] = [];
-  constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
 
   conexiones: Conexion[] = [];
   nuevaConexion: any = {};
@@ -25,6 +32,11 @@ export class ConexionFormComponent {
   destino: Ciudad | undefined;
   transporte: Transporte | undefined;
   tipoTransporteSeleccionado: string | undefined;
+
+  constructor(
+    private dialogRef: MatDialogRef<ConexionFormComponent>,
+    private ciudadService: CiudadService
+  ) {}
 
   formatConexionString(conexion: Conexion): string {
     const partes = [conexion.origen, conexion.destino, conexion.transporte];
@@ -39,6 +51,38 @@ export class ConexionFormComponent {
     console.log('Conexion recibida a string:', conexionString);
 
     form.resetForm();
+  }
+
+  private crearTransporte(
+    tipo: string,
+    values: any
+  ): Tren | Coche | Avion | Barco {
+    switch (tipo) {
+      case 'tren':
+        return new Tren(
+          values.numTren,
+          values.numAsientoTren,
+          this.origen!,
+          this.destino!
+        );
+
+      case 'avion':
+        return new Avion(
+          values.numAsientoAvion,
+          values.numVuelo,
+          this.origen!,
+          this.destino!
+        );
+
+      case 'coche':
+        return new Coche(values.matricula, this.origen!, this.destino!);
+
+      case 'barco':
+        return new Barco(values.numBarco, this.origen!, this.destino!);
+
+      default:
+        throw new Error(`Tipo de transporte no reconocido: ${tipo}`);
+    }
   }
 
   eliminarConexion(index: number) {

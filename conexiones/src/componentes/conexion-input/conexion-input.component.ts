@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Conexion } from '../../clases/constructor';
+import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-conexion-form',
@@ -14,11 +16,20 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ConexionFormComponent {
   tipoTransporteSeleccionado: string | undefined;
+  numConexiones: number = 1;
+  conexiones: Conexion[] = []
 
   constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
 
   agregarConexion(form: NgForm) {
     console.log('Nueva Conexion:', form.value);
+    this.conexiones.push(form.value)
+    console.log('Conexiones:', this.conexiones);
+
+  }
+
+  newConexion(){
+
   }
 
   close() {

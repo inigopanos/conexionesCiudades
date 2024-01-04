@@ -49,6 +49,10 @@ class Tren extends Transporte {
     this.origen = origen;
     this.destino = destino;
   }
+
+  override toString(): string{
+    return `${this.origen} ${this.destino} ${this.tipo} ${this.numTren} ${this.numAsiento}`
+  }
 }
 
 class Avion extends Transporte {
@@ -64,6 +68,10 @@ class Avion extends Transporte {
     this.origen = origen;
     this.destino = destino;
   }
+
+  override toString(): string{
+    return `${this.origen} ${this.destino} ${this.tipo} ${this.numVuelo} ${this.numAsiento}`
+  }
 }
 
 class Coche extends Transporte {
@@ -77,6 +85,10 @@ class Coche extends Transporte {
     this.origen = origen;
     this.destino = destino;
   }
+
+  override toString(): string{
+    return `${this.origen} ${this.destino} ${this.tipo} ${this.matricula}`
+  }
 }
 
 class Barco extends Transporte {
@@ -89,6 +101,10 @@ class Barco extends Transporte {
     this.numBarco = numBarco;
     this.origen = origen;
     this.destino = destino;
+  }
+
+  override toString(): string{
+    return `${this.origen} ${this.destino} ${this.tipo} ${this.numBarco}`
   }
 }
 

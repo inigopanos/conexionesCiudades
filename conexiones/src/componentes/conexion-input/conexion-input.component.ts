@@ -38,47 +38,44 @@ export class ConexionFormComponent {
     private ciudadService: CiudadService
   ) {}
 
-  formatConexionString(conexion: Conexion): string {
-    const partes = [conexion.origen, conexion.destino, conexion.transporte];
 
-    return `${conexion.origen} ${conexion.destino} ${conexion.transporte}`;
-  }
 
   agregarConexion(form: NgForm) {
+    const transporte = this.crearTransporte(this.tipoTransporteSeleccionado!, form.value);
+
     this.conexiones.push({ ...form.value });
     this.nuevaConexion = {};
-    const conexionString = this.formatConexionString(form.value);
-    console.log('Conexion recibida a string:', conexionString);
 
     form.resetForm();
   }
 
   private crearTransporte(
     tipo: string,
-    values: any
+    values: any,
+    
   ): Tren | Coche | Avion | Barco {
-    switch (tipo) {
+    switch (tipo.toLowerCase()) {
       case 'tren':
         return new Tren(
           values.numTren,
           values.numAsientoTren,
-          this.origen!,
-          this.destino!
+          values.origen,
+          values.destino
         );
 
       case 'avion':
         return new Avion(
           values.numAsientoAvion,
           values.numVuelo,
-          this.origen!,
-          this.destino!
+          values.origen,
+          values.destino
         );
 
       case 'coche':
-        return new Coche(values.matricula, this.origen!, this.destino!);
+        return new Coche(values.matricula, values.origen, values.destino);
 
       case 'barco':
-        return new Barco(values.numBarco, this.origen!, this.destino!);
+        return new Barco(values.numBarco, values.origen, values.destino);
 
       default:
         throw new Error(`Tipo de transporte no reconocido: ${tipo}`);

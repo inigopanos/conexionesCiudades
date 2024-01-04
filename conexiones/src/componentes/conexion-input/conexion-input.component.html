@@ -5,10 +5,10 @@
   <label for="destino">Destino:</label>
   <input type="text" id="destino" name="destino" ngModel required />
 
-  <label for="tipoTransporte"></label>
+  <label for="transporte"></label>
   <select
-    id="tipoTransporte"
-    name="tipoTransporte"
+    id="transporte"
+    name="transporte"
     [(ngModel)]="tipoTransporteSeleccionado"
   >
     <option value="coche">Coche</option>
@@ -45,6 +45,14 @@
   </div>
 
   <button type="submit">Agregar Conexión</button>
-  <button type="button" (click)="newConexion()">Nueva Conexion</button>
-  <button type="button" (click)="close()">Cerrar</button>
 </form>
+
+<div *ngIf="conexiones.length > 0">
+    <h3>Conexiones existentes:</h3>
+    <div *ngFor="let conexion of conexiones; let i = index">
+      <div>
+        {{ conexion.origen }} a {{ conexion.destino }} usando {{ conexion.transporte }}
+        <button type="button" (click)="eliminarConexion(i)">Eliminar</button>
+      </div>
+    </div>
+  </div>

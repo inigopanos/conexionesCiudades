@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Conexion } from '../../clases/constructor';
-import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-conexion-form',
@@ -16,20 +15,21 @@ import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/sign
 })
 export class ConexionFormComponent {
   tipoTransporteSeleccionado: string | undefined;
-  numConexiones: number = 1;
-  conexiones: Conexion[] = []
+  conexiones: Conexion[] = [];
+  nuevaConexion: any = {};
 
   constructor(private dialogRef: MatDialogRef<ConexionFormComponent>) {}
 
   agregarConexion(form: NgForm) {
     console.log('Nueva Conexion:', form.value);
-    this.conexiones.push(form.value)
+    this.conexiones.push({ ...form.value });
     console.log('Conexiones:', this.conexiones);
-
+    form.resetForm();
+    this.nuevaConexion = {}
   }
 
-  newConexion(){
-
+  eliminarConexion(index: number) {
+    this.conexiones.splice(index, 1)
   }
 
   close() {

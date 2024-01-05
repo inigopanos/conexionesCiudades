@@ -46,10 +46,13 @@ export class CiudadService {
       this.conexionesString
     );
     // Se bucan las rutas entre ciudades
-    this.encontrarRutas(
+    let mensaje: string;
+
+    mensaje = this.encontrarRutas(
       redCiudades[this.ciudadOrigen],
       redCiudades[this.ciudadDestino]
     );
+    return mensaje;
   }
 
   crearRedCiudades(ciudades: string[], conexiones: string[]) {
@@ -64,32 +67,27 @@ export class CiudadService {
     for (const conexion of this.conexionesString) {
       const [origen, destino, tipoTransporte, ...detalles] =
         conexion.split(' ');
-      
+
       let transporte: Transporte;
 
       switch (tipoTransporte) {
         case 'Coche': // Este origen y destino son strings, en vez de Ciudad!!
-          console.log('Tipo de transporte:', tipoTransporte);
           transporte = new Coche(detalles[0], origen, destino);
           break;
 
         case 'Tren':
-          console.log('Tipo de transporte:', tipoTransporte);
           transporte = new Tren(detalles[0], detalles[1], origen, destino);
           break;
 
         case 'Avion':
-          console.log('Tipo de transporte:', tipoTransporte);
           transporte = new Avion(detalles[0], detalles[1], origen, destino);
           break;
 
         case 'Barco':
-          console.log('Tipo de transporte:', tipoTransporte);
           transporte = new Barco(detalles[0], origen, destino);
           break;
 
         default:
-          console.log('Tipo de transporte:', tipoTransporte);
           console.error(`Tipo de transporte desconocido: ${tipoTransporte}`);
           continue;
       }
@@ -99,8 +97,55 @@ export class CiudadService {
       );
     }
 
-    console.log('Red Ciudades:', redCiudades);
     return redCiudades;
+  }
+
+  imprimirMensajeRuta(ciudades: Set<Ciudad>) {
+    let ciudadesIter = [...ciudades];
+    let mensaje: string = ``;
+    let mensajeError: string = '';
+    let index: number = 0
+
+    if (ciudades.size !== 0) {
+      for (let i = 1; i < ciudadesIter.length; i++) {
+        const conexion = ciudadesIter[i - 1].conexiones.find(
+          (con) => con.destino === ciudadesIter[i]
+        );
+        index++;
+
+        if (conexion) {
+          const transporte: Transporte = conexion.transporte;
+
+          if (transporte instanceof Tren) {
+            mensaje += `${index}. Coge el tren ${transporte.numTren} con asiento ${transporte.numAsiento}`;
+          } else if (transporte instanceof Coche) {
+            mensaje += `${index}. Coge el coche con matrícula ${transporte.matricula}`;
+          } else if (transporte instanceof Avion) {
+            mensaje += `${index}. Coge el avión con número de vuelo ${transporte.numVuelo} y asiento ${transporte.numAsiento}`;
+          } else if (transporte instanceof Barco) {
+            mensaje += `${index}. Coge el barco con número ${transporte.numBarco}`;
+          } else {
+            // Manejar el caso en el que el tipo de transporte no es reconocido
+            mensajeError = `Tipo de transporte no reconocido`;
+            return mensajeError;
+          }
+
+          mensaje += ` desde ${ciudadesIter[i - 1].nombre} hasta ${
+            ciudadesIter[i].nombre
+          }. <br>`;
+        } else {
+          mensajeError = `${i}. No hay conexión directa desde ${
+            ciudadesIter[i - 1].nombre
+          } hasta ${ciudadesIter[i].nombre}.`;
+          return mensajeError;
+        }
+      }
+
+      console.error('¡Felicidades, has llegado a tu destino!');
+      return mensaje;
+    } else {
+      return 'El conjunto de ciudades está vacío.';
+    }
   }
 
   encontrarRutas(ciudadOrigen: Ciudad, ciudadDestino: Ciudad) {
@@ -138,64 +183,10 @@ export class CiudadService {
     }
 
     if (rutaEncontrada) {
-      this.imprimirMensajeRuta(ciudadesExploradas);
-      console.log('Se ha encontrado la ruta:', ciudadesExploradas);
+      let mensaje = this.imprimirMensajeRuta(ciudadesExploradas);
+      return mensaje;
     } else {
-      console.log(
-        `No existe una ruta de ${ciudadOrigen.nombre} a ${ciudadDestino.nombre}`
-      );
+      return `No existe una ruta de ${ciudadOrigen.nombre} a ${ciudadDestino.nombre}`;
     }
-  }
-
-  imprimirMensajeRuta(ciudades: Set<Ciudad>) {
-    let ciudadesIter = [...ciudades];
-    let mensaje = `Coge el `;
-
-    if (ciudades.size !== 0) {
-      console.log(
-        `Viaje de ${ciudadesIter[0].nombre} a ${
-          ciudadesIter[ciudadesIter.length - 1].nombre
-        }:`
-      );
-
-      for (let i = 1; i < ciudadesIter.length; i++) {
-        const conexion = ciudadesIter[i - 1].conexiones.find(
-          (con) => con.destino === ciudadesIter[i]
-        );
-
-        if (conexion) {
-          const transporte: Transporte = conexion.transporte;
-
-          if (transporte instanceof Tren) {
-            mensaje += `tren ${transporte.numTren} con asiento ${transporte.numAsiento}`;
-          } else if (transporte instanceof Coche) {
-            mensaje += `coche con matrícula ${transporte.matricula}`;
-          } else if (transporte instanceof Avion) {
-            mensaje += `avión con número de vuelo ${transporte.numVuelo} y asiento ${transporte.numAsiento}`;
-          } else if (transporte instanceof Barco) {
-            mensaje += `barco con número ${transporte.numBarco}`;
-          } else {
-            // Manejar el caso en el que el tipo de transporte no es reconocido
-            mensaje += `Tipo de transporte no reconocido`;
-          }
-
-          mensaje += ` desde ${ciudadesIter[i - 1].nombre} hasta ${
-            ciudadesIter[i].nombre
-          }`;
-          console.log(mensaje);
-          return;
-        } else {
-          console.log(
-            `${i}. No hay conexión directa desde ${
-              ciudadesIter[i - 1].nombre
-            } hasta ${ciudadesIter[i].nombre}.`
-          );
-          return;
-        }
-      }
-    }
-
-    console.log('¡Felicidades, has llegado a tu destino!');
-    return mensaje;
   }
 }

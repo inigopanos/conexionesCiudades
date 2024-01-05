@@ -1,11 +1,18 @@
 <form (ngSubmit)="agregarCiudades(form)" #form="ngForm">
-  <label for="ciudad">Ciudad</label>
-  <input
-    type="text"
-    id="ciudad"
-    name="ciudad"
-    [(ngModel)]="nuevaCiudad"
-    required
-  />
-  <button type="submit">Agregar Ciudades</button>
+  <div class="agregar-ciudades">
+    <div>
+      <label for="ciudad">Ciudad</label>
+    </div>
+    <div>
+      <input
+        type="text"
+        id="ciudad"
+        name="ciudad"
+        [(ngModel)]="nuevaCiudad"
+        required
+        pattern="{{ ciudadPattern }}"
+      />
+      <button mat-button type="submit">Agregar Ciudades</button>
+    </div>
+  </div>
 </form>

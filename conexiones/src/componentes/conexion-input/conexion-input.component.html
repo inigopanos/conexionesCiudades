@@ -1,14 +1,15 @@
-<form (ngSubmit)="agregarConexion(form)" #form="ngForm">
+<form (ngSubmit)="agregarConexion(form)" #form="ngForm" >
+
   <div *ngIf="ciudades.length > 0">
     <label for="origen">Origen:</label>
-    <select id="origen" name="origen" ngModel required>
+    <select id="origen" name="origen" ngModel required >
       <option *ngFor="let ciudad of ciudades" [value]="ciudad">
         {{ ciudad }}
       </option>
     </select>
 
     <label for="destino">Destino:</label>
-    <select id="destino" name="destino" ngModel required>
+    <select id="destino" name="destino" ngModel required cSelect>
       <option *ngFor="let ciudad of ciudades" [value]="ciudad">
         {{ ciudad }}
       </option>
@@ -29,7 +30,7 @@
     <div *ngIf="tipoTransporteSeleccionado === 'Coche'">
       <!-- Campos para Coche -->
       <label for="matricula">Matrícula:</label>
-      <input type="text" id="matricula" name="matricula" ngModel required />
+      <input cFormControl type="text" id="matricula" name="matricula" ngModel required />
     </div>
     <div *ngIf="tipoTransporteSeleccionado === 'Tren'">
       <!-- Campos para Tren -->
@@ -67,15 +68,17 @@
 
     <button type="submit">Agregar Conexión</button>
   </div>
-</form>
 
-<div *ngIf="conexiones.length > 0">
-  <h3>Conexiones existentes:</h3>
-  <div *ngFor="let conexion of conexiones; let i = index">
-    <div>
-      {{ conexion.origen }} a {{ conexion.destino }} usando
-      {{ conexion.transporte }}
-      <button type="button" (click)="eliminarConexion(i)">Eliminar</button>
+  <div *ngIf="conexiones.length > 0">
+    <h3>Conexiones existentes:</h3>
+    <div *ngFor="let conexion of conexiones; let i = index">
+      <div>
+        {{ conexion.origen }} a {{ conexion.destino }} usando
+        {{ conexion.transporte }}
+        <button type="button" (click)="eliminarConexion(i)">Eliminar</button>
+      </div>
     </div>
   </div>
-</div>
+  
+</form>
+

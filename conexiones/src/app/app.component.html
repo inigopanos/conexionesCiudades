@@ -1,30 +1,49 @@
-<h1>Hello World!</h1>
-<div class="main-page">
-  <app-component-base [ciudades]="ciudades"> 
-  </app-component-base>
-  <br>
-
-  <app-ciudades-form
-    (ciudadAgregada)="onCiudadAgregada($event)"
-  ></app-ciudades-form
-  ><br />
-
-  <div  *ngIf="ciudades.length > 1; else elseBlock"> 
-    <app-conexion-form [ciudades]="ciudades"></app-conexion-form>
+<div class="main">
+  <div class="title">
+    <h1>¡Organice su propio viaje!</h1>
   </div>
-  <ng-template #elseBlock>
-    <p>Introduzca al menos dos ciudades para continuar</p>
-  </ng-template>
-</div>
+  <div class="main-page">
+    <div class="base">
+      <app-component-base [ciudades]="ciudades"> </app-component-base>
+      <br />
+    </div>
 
-<div *ngIf="ciudades.length > 0">
-  <h2>Ciudades:</h2>
-  <ul>
-    @for (ciudad of ciudades; track ciudad){
-    <li>
-      {{ ciudad }}
-      <button type="button" (click)="eliminarCiudad(ciudad)">Eliminar</button>
-    </li>
-    }
-  </ul>
+    <div class="main-ciudades">
+      <div class="ciudades">
+        <app-ciudades-form
+          (ciudadAgregada)="onCiudadAgregada($event)"
+        ></app-ciudades-form
+        ><br />
+      </div>
+      <div class="main-ciudades__list">
+        <div *ngIf="ciudades.length > 0">
+          <h2>Ciudades:</h2>
+          <ul>
+            @for (ciudad of ciudades; track ciudad){
+            <div class="ciudades-establecidas">
+              <li>
+                {{ ciudad }}
+                <button type="button" (click)="eliminarCiudad(ciudad)">
+                  Eliminar
+                </button>
+              </li>
+            </div>
+
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="conexiones">
+      <div *ngIf="ciudades.length > 1; else elseBlock">
+        <app-conexion-form [ciudades]="ciudades"></app-conexion-form>
+      </div>
+      <div class="ciudades2">
+        <ng-template #elseBlock>
+          <p>Introduzca al menos dos ciudades para continuar</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
 </div>
